@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>{{ request.session.login }}</h1>
 
+{% if "in" in request.session %}
+    <h1>{{ request.session.login }}</h1>
+    <p>{{ dict.position }}</p>
+{% endif %}
 </body>
 </html>

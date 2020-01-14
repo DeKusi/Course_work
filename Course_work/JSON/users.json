@@ -2,11 +2,13 @@
   "users": [
     {
       "login": "Alex",
+      "id": 1,
       "password": "1234",
       "position": "Admin"
     },
     {
-      "login": "Pa4nuta",
+      "login": "P4nuta",
+      "id": 2,
       "password": "4321",
       "position": "superuser"
     }

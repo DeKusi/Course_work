@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+{% if "in" not in request.session %}
+<button><a href="/login/">Авторизация</a></button>
+{% else%}
+<button><a href="/account/">{{ request.session.login }}</a> </button>
+{% endif %}
 
 </body>
 </html>
