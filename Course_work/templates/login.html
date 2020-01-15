@@ -16,8 +16,8 @@
         {% csrf_token %}
         {{ form.as_p }}
         <br><input type="submit" value="Войти"/></br>
-    </div>
 	</form>
+	</div>
 {% if error  == 'Неправильно введён логин или пароль' %}
     <p>
     {{ error }}
