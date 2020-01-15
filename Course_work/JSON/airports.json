@@ -1,0 +1,44 @@
+{
+  "airports": [
+    {
+      "name": "Пулково",
+      "id": 1,
+      "flights": [
+        {
+          "id": 1,
+          "surf_point": "Шереметьево",
+          "departure_time": "11:00",
+          "arrival_time": "11:30",
+          "plane": {
+            "name": "Гоче",
+            "model": "Boeing 777",
+            "type": "Пассажирский самолёт",
+            "service_classes": [
+              "Эконом",
+              "Бизнес",
+              "Первый"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": " ",
+      "id": 1,
+      "flights": [
+        {
+          "id": 1,
+          "surf_point": " ",
+          "departure_time": " ",
+          "arrival_time": " ",
+          "plane": {
+            "name": " ",
+            "model": " ",
+            "type": " ",
+            "service_classes": " "
+          }
+        }
+      ]
+    }
+  ]
+}

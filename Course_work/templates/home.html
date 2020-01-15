@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% if "in" not in request.session %}
-<button><a href="/login/">Авторизация</a></button>
-{% else%}
-<button><a href="/account/">{{ request.session.login }}</a> </button>
-{% endif %}
+{% extends 'pattern.html' %}
+{% block title %}
+    Главная
+{% endblock %}
+{% block header %}
+    {{ block.super }}
+{% endblock %}
 
-</body>
-</html>
+    {% block content %}
+        <p>
+            {% if "id" not in request.session %}
+                <button><a href="/login/">Авторизация</a></button>
+            {% else%}
+                <button><a href="/account/">{{ request.session.login }}</a> </button>
+            {% endif %}
+        </p>
+    {% endblock %}
+
+
+

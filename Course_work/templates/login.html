@@ -10,10 +10,15 @@
 
     <form action="/login/" method="post"> {% csrf_token %}
       {{ form.as_p }}
-    <div>
-        <button type="submit">Авторизоваться</button>
-    </div>
+        <div>
+            <button type="submit">Авторизоваться</button>
+        </div>
     </form>
+{% if error  == 'Неправильно введён логин или пароль' %}
+    <p>
+    {{ error }}
+    </p>
+{% endif %}
 
 </body>
 </html>
