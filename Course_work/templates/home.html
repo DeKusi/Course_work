@@ -51,7 +51,7 @@
       </div>
     
       <div class="right-side">
-        
+        <button>
          {% if "id" not in request.session %}
            <a href="/login/">Авторизация</a>
          {% else %}
@@ -59,7 +59,8 @@
              {{ request.session.login }}
            </a> 
          {% endif %}
-      
+        </button>
+        
       </div>
     </div>
    
