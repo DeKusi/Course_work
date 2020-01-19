@@ -1,23 +1,27 @@
-{% extends 'pattern.html' %}
-{% block title %}
-    Главная
-{% endblock %}
-{% block header %}
+<html>
 
-{% endblock %}
+  <head>
+  
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    
+     <link href="../../static/style1.css" type="text/css" rel="stylesheet">
+     
+  </head>
+  
+  <body>
 
-    {% block content %}
-        <p>
-            {% if "id" not in request.session %}
-                <button><a href="/login/">Авторизация</a></button>
-            {% else%}
-                <button><a href="/account/">{{ request.session.login }}</a> </button>
-            {% endif %}
-        </p>
+    <header>
+      <img src="../../static/airling1.png">
+    </header>
 
+    <div class="side--wrapper">
+       <div class="left-side">
 
- <table>
-    {% for air in air_list %}
+        <table>
+
+          <th colspan="3">Список аэропортов</th>
+ {% for air in air_list %}
         <tr>
             <td>
                 {% if air.0 != 0 %}
@@ -48,9 +52,26 @@
              </td>
         </tr>
     {% endfor %}
- </table>
+        </table>
 
-    {% endblock %}
+      </div>
+    
+      <div class="right-side">
 
-
+        <button>
+         {% if "id" not in request.session %}
+           <a href="/login/">Авторизация</a>
+         {% else %}
+           <a href="/account/">
+             {{ request.session.login }}
+           </a> 
+         {% endif %}
+       </button>
+      
+      </div>
+    </div>
+   
+    
+  </body>
+</html>
 
