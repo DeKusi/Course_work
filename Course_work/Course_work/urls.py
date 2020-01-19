@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^add_user/', views.add_user, name='add_user'),
     url(r'^add_mod/', views.add_mod, name='add_mod'),
     url(r'^list_del_user/', views.list_del_user, name='list_del_user'),
-    url(r'(?P<air_id>\d+)', views.air_detail, name='air_detail_url'),
-    url(r'(?P<user_id>\d+)', views.del_user1, name='del_user1')
+    url(r'^airport/(?P<air_id>\d+)', views.air_detail, name='air_detail_url'),
+    url(r'^del_user/(?P<user_id>\d+)', views.del_user1, name='del_user1'),
+    url(r'^add_ticket/(?P<air_id>\d+)/(?P<fly_id>\d+)', views.add_ticket, name='add_ticket')
 ]

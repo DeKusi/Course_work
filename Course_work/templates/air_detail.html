@@ -79,10 +79,16 @@
                 </p>
                 {% endfor %}
              </td>
-            {% if 'id' in request.session %}
+            {% if 'id' in request.session and user_tickets.0.point_of_departure == name and user_tickets.0.id == fly.id%}
                 <td>
                 <button>
-                    <a href="#">
+                        Билет куплен
+                </button>
+                </td>
+                {% elif 'id' in request.session%}
+                <td>
+                <button>
+                    <a href="{% url 'add_ticket' id fly.id%}">
                         Купить билет
                     </a>
                 </button>

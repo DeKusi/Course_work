@@ -6,6 +6,7 @@
       "flights": [
         {
           "id": 1,
+          "point_of_departure": "Аэропорт Домодедово",
           "surf_point": "Аэропорт Пулково",
           "departure_time": "11:00",
           "arrival_time": "11:30",
@@ -22,6 +23,7 @@
         },
         {
           "id": 2,
+          "point_of_departure": "Аэропорт Домодедово",
           "surf_point": "Аэропорт Бойсе",
           "departure_time": "15:15",
           "arrival_time": "22:40",
@@ -43,6 +45,7 @@
       "flights": [
         {
           "id": 1,
+          "point_of_departure": "Аэропорт Шереметьево ",
           "surf_point": "Аэропорт Самуи",
           "departure_time": "12:15",
           "arrival_time": "19:00",
@@ -59,6 +62,7 @@
         },
         {
           "id": 2,
+          "point_of_departure": "Аэропорт Шереметьево ",
           "surf_point": "Аэропорт Пхукет",
           "departure_time": "13:00",
           "arrival_time": "17:15",
@@ -81,6 +85,7 @@
       "flights": [
         {
           "id": 1,
+          "point_of_departure": "Аэропорт Быково",
           "surf_point": "Аэропорт Тбилиси",
           "departure_time": "07:45",
           "arrival_time": "16:30",
@@ -97,7 +102,7 @@
         }
       ]
     },
-        {
+    {
       "name": "Аэропорт Быково",
       "id": 3,
       "flights": [

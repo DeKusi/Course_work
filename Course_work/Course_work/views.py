@@ -37,6 +37,8 @@ def home(request):
 
 
 def account(request):
+    with open("JSON/users.json", 'rb') as read_file_json:
+        users = json.load(read_file_json)
     page = 'account.html'
     if "id" not in request.session or request.session['status'] == 'false':
         page = "error_404.html"
@@ -46,7 +48,13 @@ def account(request):
         page = 'account_admin.html'
     elif request.session['position'] == 'moderator':
         page = 'account_moderator.html'
-    return render(request, page, {})
+
+    # Проверка, покупал ли билеты
+    if len(users['users'][int(request.session['id']) - 1]['tickets']) == 0:
+        data = [0]
+    else:
+        data = users['users'][int(request.session['id']) - 1]['tickets']
+    return render(request, page, {'data': data})
 
 
 def error404(request):
@@ -76,7 +84,7 @@ def moderator_list(request):
 def add_user(request):
     AddForm = AddUser(request.POST or None)
     error = 'None'
-    if 'id' not in request.session:
+    if 'id' in request.session:
         return redirect("/error")
     elif request.POST:
         with open("JSON/users.json", 'rb') as read_file_json:
@@ -94,7 +102,8 @@ def add_user(request):
                                    "id": len(users['users']) + 1,
                                    "password": Pass,
                                    "position": "user",
-                                   "status": "true"})
+                                   "status": "true",
+                                   "tickets": []})
             with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
                 read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
             request.session.set_expiry(86400)
@@ -129,10 +138,10 @@ def add_mod(request):
                                    "id": len(users['users']) + 1,
                                    "password": Pass,
                                    "position": "moderator",
-                                   "status": "true"})
+                                   "status": "true",
+                                   "tickets": []})
             with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
                 read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
-            request.session.set_expiry(86400)
             return redirect("/moderator_list")
 
     return render(request, "add_mod.html", {'form': AddForm,
@@ -175,7 +184,7 @@ def login(request):
         error = 'Неправильно введён логин или пароль'
         #       checkFunc = "none"
         for user in users['users']:
-            if user['login'] == Login and user['password'] == Pass:
+            if user['login'] == Login and user['password'] == Pass and user['status'] == 'true':
                 request.session.set_expiry(86400)
                 request.session['id'] = user['id']
                 request.session['login'] = user['login']
@@ -193,10 +202,41 @@ def logout(request):
 
 
 def air_detail(request, air_id):
+    user_tickets = 0
     with open("JSON/airports.json", encoding='utf-8') as read_file_json:
         air = json.load(read_file_json)
 
-    name = air['airports'][int(air_id)-1]['name']
-    flights = air['airports'][int(air_id)-1]['flights']
+    name = air['airports'][int(air_id) - 1]['name']
+    id = air_id
+    flights = air['airports'][int(air_id) - 1]['flights']
 
-    return render(request, "air_detail.html", {"name": name, "flights": flights})
+    # если зареганный чел, то если куплен билет, на кнопочке писалось куплен
+    if 'id' in request.session:
+        with open("JSON/users.json", encoding='utf-8') as read_file_json:
+            users = json.load(read_file_json)
+        user_tickets = users['users'][int(request.session['id']) - 1]['tickets']
+        list_point_of_departure = []
+        for tik in user_tickets:
+            list_point_of_departure.append()
+
+
+
+    return render(request, "air_detail.html", {"name": name,
+                                               "id": id,
+                                               "flights": flights,
+                                               "user_tickets": user_tickets})
+
+
+def add_ticket(request, air_id, fly_id):
+    with open("JSON/users.json", encoding='utf-8') as read_file_json:
+        users = json.load(read_file_json)
+    with open("JSON/airports.json", encoding='utf-8') as read_file_air_json:
+        airports = json.load(read_file_air_json)
+
+    users['users'][int(request.session['id'])-1]['tickets'].append(
+        airports['airports'][int(air_id) - 1]['flights'][int(fly_id) - 1])
+
+    with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
+        read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
+
+    return redirect("/account")
