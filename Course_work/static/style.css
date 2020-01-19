@@ -1,0 +1,48 @@
+body {
+	background-color: #87CEEB ;
+	text-align: center;
+}
+header {
+	font-family: Courier;
+	color: #005BFF;
+	text-align: center;
+	background: opacity;
+}
+h1 {
+	font-size: 48px;
+	letter-spacing: 0.05em;
+}
+input {
+	font-family: Courier;
+	border-radius: 10px;
+	padding: 6px 0px 6px 6px;
+	border-style: none;
+	border-color:  #005BFF;
+	background-color: #87CEEB ;
+	color: #005BFF;
+	width: 120px;
+	height: 36px;
+	font-size: 20px;
+}
+input:hover{
+	background-color: #005BFF;
+	color: #87CEEB ;
+}
+input[type="submit"]:active{
+	background-color: #87CEEB;
+	color: #005BFF;
+}
+label{
+	font-family: Courier;
+	font-weight: bold;
+	color: #005BFF;
+	letter-spacing: 0.05em;
+}
+.table {
+	margin: auto;
+	width:380px;
+	padding-top: 10px;
+	border-radius: 10px;
+	border-color:  #005BFF;
+	border-style: dotted;
+}
