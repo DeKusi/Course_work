@@ -9,7 +9,31 @@ import json
 
 
 def home(request):
-    return render(request, 'home.html', {})
+    with open("JSON/airports.json", 'rb') as read_file_json:
+        airports = json.load(read_file_json)
+        len_air = len(airports['airports'])
+        num_cell = len_air + (len_air % 3)
+        if len_air % 3 == 0:
+            p = 0
+        elif len_air % 3 == 1:
+            p = 2
+        elif len_air % 3 == 2:
+            p = 1
+        len_air_r = len_air + p
+        air_list = []
+
+        for i in range(0, len_air_r - 3, 3):
+            rand_str = [airports['airports'][i], airports['airports'][i + 1], airports['airports'][i + 2]]
+            air_list.append(rand_str)
+
+        if p == 0:
+            air_list.append([airports['airports'][len_air_r - 3], airports['airports'][len_air_r - 2],
+                             airports['airports'][len_air_r - 1]])
+        elif p == 1:
+            air_list.append([airports['airports'][len_air_r - 3], airports['airports'][len_air_r - 2], 0])
+        elif p == 2:
+            air_list.append([airports['airports'][len_air_r - 3], 0, 0])
+    return render(request, 'home.html', {'air_list': air_list})
 
 
 def account(request):
@@ -32,7 +56,7 @@ def login(request):
         checkLogin = req.get("login")
         checkPass = req.get("password")
         error = 'Неправильно введён логин или пароль'
- #       checkFunc = "none"
+        #       checkFunc = "none"
         for user in users['users']:
             if user['login'] == checkLogin and user['password'] == checkPass:
                 request.session.set_expiry(15)
@@ -40,7 +64,16 @@ def login(request):
                 request.session['login'] = user['login']
                 request.session['position'] = user['position']
                 return redirect("/account")
-            break
 
     return render(request, 'login.html', {'form': logForm,
                                           'error': error})
+
+
+def air_detail(request, air_id):
+    with open("JSON/airports.json", encoding='utf-8') as read_file_json:
+        air = json.load(read_file_json)
+
+    name = air['airports'][int(air_id)-1]['name']
+    flights = air['airports'][int(air_id)-1]['flights']
+
+    return render(request, "air_detail.html", {"name": name, "flights": flights})

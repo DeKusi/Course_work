@@ -1,20 +1,35 @@
 {
   "airports": [
     {
-      "name": "Пулково",
+      "name": "Аэропорт Домодедово",
       "id": 1,
       "flights": [
         {
           "id": 1,
-          "surf_point": "Шереметьево",
+          "surf_point": "Аэропорт Пулково",
           "departure_time": "11:00",
           "arrival_time": "11:30",
           "plane": {
-            "name": "Гоче",
-            "model": "Boeing 777",
+            "name": "Boeing",
+            "model": "777",
             "type": "Пассажирский самолёт",
             "service_classes": [
               "Эконом",
+              "Бизнес",
+              "Первый"
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "surf_point": "Аэропорт Бойсе",
+          "departure_time": "15:15",
+          "arrival_time": "22:40",
+          "plane": {
+            "name": "Airbus",
+            "model": "A330",
+            "type": "Пассажирский самолёт",
+            "service_classes": [
               "Бизнес",
               "Первый"
             ]
@@ -23,19 +38,61 @@
       ]
     },
     {
-      "name": " ",
-      "id": 1,
+      "name": "Аэропорт Шереметьево ",
+      "id": 2,
       "flights": [
         {
           "id": 1,
-          "surf_point": " ",
-          "departure_time": " ",
-          "arrival_time": " ",
+          "surf_point": "Аэропорт Самуи",
+          "departure_time": "12:15",
+          "arrival_time": "19:00",
           "plane": {
-            "name": " ",
-            "model": " ",
-            "type": " ",
-            "service_classes": " "
+            "name": "CRAIC",
+            "model": "CR929",
+            "type": "Пассажирский самолёт",
+            "service_classes": [
+              "Эконом",
+              "Бизнес",
+              "Первый"
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "surf_point": "Аэропорт Пхукет",
+          "departure_time": "13:00",
+          "arrival_time": "17:15",
+          "plane": {
+            "name": "Boeing",
+            "model": "737-800",
+            "type": "Пассажирский самолёт",
+            "service_classes": [
+              "Бизнес",
+              "Первый"
+            ]
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Аэропорт Быково",
+      "id": 3,
+      "flights": [
+        {
+          "id": 1,
+          "surf_point": "Аэропорт Тбилиси",
+          "departure_time": "07:45",
+          "arrival_time": "16:30",
+          "plane": {
+            "name": "Comac",
+            "model": "CR 929",
+            "type": "Пассажирский самолёт",
+            "service_classes": [
+              "Эконом",
+              "Бизнес",
+              "Первый"
+            ]
           }
         }
       ]

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}}</title>
+</head>
+<body>
+<h1>{{ name }}</h1>
+ <table>
+        <tr>
+            <td>
+                <p>Время отправления</p>
+            </td>
+            <td>
+                <p>Время прибытия</p>
+            </td>
+            <td>
+                <p>Пункт назначения</p>
+            </td>
+            <td>
+                <p>Название</p>
+            </td>
+            <td>
+                <p>Модель</p>
+            </td>
+            <td>
+                <p>Тип</p>
+            </td>
+            <td>
+                <p>Классы обслуживания</p>
+            </td>
+        </tr>
+    {% for fly in flights %}
+        <tr>
+            <td>
+                <p>
+                    {{ fly.departure_time }}
+                </p>
+            </td>
+             <td>
+                 <p>
+                     {{fly.arrival_time}}
+                 </p>
+             </td>
+             <td>
+                <p>
+                    {{fly.surf_point}}
+                </p>
+             </td>
+             <td>
+                <p>
+                    {{fly.plane.name}}
+                </p>
+             </td>
+             <td>
+                <p>
+                    {{fly.plane.model}}
+                </p>
+             </td>
+             <td>
+                <p>
+                    {{fly.plane.type}}
+                </p>
+             </td>
+            <td>
+                {% for class in fly.plane.service_classes %}
+                <p>
+                    {{class}}
+                </p>
+                {% endfor %}
+             </td>
+
+        </tr>
+    {% endfor %}
+ </table>
+</body>
+</html>

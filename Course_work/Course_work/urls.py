@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^$', views.home, name='home_url'),
     url(r'^login/', views.login, name='login'),
-    url(r'^account/', views.account, name='account')
+    url(r'^account/', views.account, name='account'),
+    url(r'(?P<air_id>\d+)', views.air_detail, name="air_detail_url")
 
 ]
