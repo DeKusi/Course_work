@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<link href="../../static/style.css" type="text/css" rel="stylesheet">
-<link href="style.css" type="text/css" rel="stylesheet">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Авторизация</title>
+<meta charset="UTF-8">
+<title>Авторизация</title>
 </head>
+<link href="../../static/style.css" type="text/css" rel="stylesheet">
+<header>
+<img src="../../static/airling1.png">
+<h1> Авторизация: </h1>
+</header>
 <body>
+<div class="table">
 {% if request.session %}
 {% endif %}
-
-    <form action="/login/" method="post"> {% csrf_token %}
-      {{ form.as_p }}
-        <div>
-            <button type="submit">Авторизоваться</button>
-        </div>
+ <form action="/login/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br><input type="submit" value="Войти"/></br>
     </form>
+    </div>
 {% if error  == 'Неправильно введён логин или пароль' %}
     <p>
     {{ error }}
     </p>
 {% endif %}
-
 </body>
 </html>
