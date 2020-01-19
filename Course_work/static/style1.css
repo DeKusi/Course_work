@@ -44,3 +44,6 @@ table{
   display: flex;
   justify-content: center;
 }
+a{
+  color: #87CEEB;
+}
