@@ -23,27 +23,27 @@
           <th colspan="3">Список аэропортов</th>
  {% for air in air_list %}
         <tr>
+        {% if air.0 != 0 %}
             <td>
-                {% if air.0 != 0 %}
                     <a href="{% url 'air_detail_url' air.0.id %}">
                          {{ air.0.name }}
                      </a>
-                {% endif %}
             </td>
+        {% endif %}
+            {% if air.1 != 0 %}
              <td>
-                 {% if air.1 != 0 %}
                     <a href="{% url 'air_detail_url' air.1.id %}">
                          {{ air.1.name }}
-                     </a>
-                 {% endif %}
+                    </a>
              </td>
+            {% endif %}
+            {% if air.2 != 0 %}
             <td>
-                {% if air.2 != 0 %}
                     <a href="{% url 'air_detail_url' air.2.id %}">
                          {{ air.2.name }}
                      </a>
-                {% endif %}
              </td>
+            {% endif %}
         </tr>
     {% endfor %}
         </table>
@@ -51,15 +51,33 @@
       </div>
     
       <div class="right-side">
-        <button>
          {% if "id" not in request.session %}
-           <a href="/login/">Авторизация</a>
+             <p>
+             <button>
+               <a href="/login/">Авторизация</a>
+             </button>
+             </p>
+             <p>
+             <button>
+               <a href="/add_user/">Регистрация</a>
+             </button>
+             </p>
+
          {% else %}
-           <a href="/account/">
-             {{ request.session.login }}
-           </a> 
+             <button>
+                 <a href="/account/">
+                    {{ request.session.login }}
+                 </a>
+             </button>
+             <p>
+                 <button>
+                 <a href="/logout">
+                     Выйти
+                 </a>
+                </button>
+
+             </p>
          {% endif %}
-        </button>
         
       </div>
     </div>

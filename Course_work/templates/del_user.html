@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление пользователей</title>
+</head>
+<body>
+<h1>Список пользователей</h1>
+{% for user in data %}
+    {% if user.position == 'user' and user.status == 'true' %}
+    <p>
+        {{ user.login }}
+        <button>
+            <a href="{% url 'del_user1' user.id%}">
+                Удалить
+            </a>
+        </button>
+    </p>
+    {% endif %}
+{% endfor %}
+</body>
+</html>

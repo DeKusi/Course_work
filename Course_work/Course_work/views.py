@@ -38,35 +38,158 @@ def home(request):
 
 def account(request):
     page = 'account.html'
-    if "id" not in request.session:
+    if "id" not in request.session or request.session['status'] == 'false':
         page = "error_404.html"
+    elif request.session['position'] == 'user':
+        page = 'account_user.html'
+    elif request.session['position'] == 'admin':
+        page = 'account_admin.html'
+    elif request.session['position'] == 'moderator':
+        page = 'account_moderator.html'
     return render(request, page, {})
+
+
+def error404(request):
+    return render(request, 'error_404.html', {})
+
+
+def user_list(request):
+    if "id" not in request.session or request.session['status'] == 'false':
+        return redirect("/error")
+    else:
+        with open("JSON/users.json", encoding='utf-8') as read_file_json:
+            users = json.load(read_file_json)
+        data = users['users']
+    return render(request, "user_list.html", {'data': data})
+
+
+def moderator_list(request):
+    if "id" not in request.session or request.session['status'] == 'false':
+        return redirect("/error")
+    else:
+        with open("JSON/users.json", encoding='utf-8') as read_file_json:
+            users = json.load(read_file_json)
+        data = users['users']
+    return render(request, "moderator_list.html", {'data': data})
+
+
+def add_user(request):
+    AddForm = AddUser(request.POST or None)
+    error = 'None'
+    if 'id' not in request.session:
+        return redirect("/error")
+    elif request.POST:
+        with open("JSON/users.json", 'rb') as read_file_json:
+            users = json.load(read_file_json)
+        req = request.POST
+        Login = req.get("login")
+        Pass = req.get("password")
+
+        for user in users['users']:
+            if user['login'] == Login:
+                error = 'Пользователь уже зрегистрирован'
+
+        if error == 'None':
+            users['users'].append({"login": Login,
+                                   "id": len(users['users']) + 1,
+                                   "password": Pass,
+                                   "position": "user",
+                                   "status": "true"})
+            with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
+                read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
+            request.session.set_expiry(86400)
+            request.session['id'] = users['users'][-1]['id']
+            request.session['login'] = users['users'][-1]['login']
+            request.session['position'] = users['users'][-1]['position']
+            request.session['status'] = users['users'][-1]['status']
+            return redirect("/account")
+
+    return render(request, "add_user.html", {'form': AddForm,
+                                             'error': error})
+
+
+def add_mod(request):
+    AddForm = AddMod(request.POST or None)
+    error = 'None'
+    if 'id' not in request.session:
+        return redirect("/error")
+    elif request.POST:
+        with open("JSON/users.json", 'rb') as read_file_json:
+            users = json.load(read_file_json)
+        req = request.POST
+        Login = req.get("login")
+        Pass = req.get("password")
+
+        for user in users['users']:
+            if user['login'] == Login:
+                error = 'Пользователь уже зрегистрирован'
+
+        if error == 'None':
+            users['users'].append({"login": Login,
+                                   "id": len(users['users']) + 1,
+                                   "password": Pass,
+                                   "position": "moderator",
+                                   "status": "true"})
+            with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
+                read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
+            request.session.set_expiry(86400)
+            return redirect("/moderator_list")
+
+    return render(request, "add_mod.html", {'form': AddForm,
+                                            'error': error})
+
+
+def list_del_user(request):
+    if "id" not in request.session or request.session['status'] == 'false':
+        return redirect("/error")
+    else:
+        with open("JSON/users.json", encoding='utf-8') as read_file_json:
+            users = json.load(read_file_json)
+        data = users['users']
+    return render(request, "del_user.html", {'data': data})
+
+
+def del_user1(request, user_id):
+    if "id" not in request.session or request.session['status'] == 'false':
+        return redirect("/error")
+    with open("JSON/users.json", encoding='utf-8') as read_file_json:
+        users = json.load(read_file_json)
+    users['users'][int(user_id) - 1]['status'] = 'false'
+    with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
+        read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
+    return redirect("/list_del_user")
 
 
 def login(request):
     logForm = LoginForm(request.POST or None)
     error = 'None'
     if 'id' in request:
-        return redirect("/account")
+        return redirect("/error")
     if request.POST:
         with open("JSON/users.json", 'rb') as read_file_json:
             users = json.load(read_file_json)
         req = request.POST
         # Проверка входа в систему
-        checkLogin = req.get("login")
-        checkPass = req.get("password")
+        Login = req.get("login")
+        Pass = req.get("password")
         error = 'Неправильно введён логин или пароль'
         #       checkFunc = "none"
         for user in users['users']:
-            if user['login'] == checkLogin and user['password'] == checkPass:
-                request.session.set_expiry(15)
+            if user['login'] == Login and user['password'] == Pass:
+                request.session.set_expiry(86400)
                 request.session['id'] = user['id']
                 request.session['login'] = user['login']
                 request.session['position'] = user['position']
+                request.session['status'] = user['status']
                 return redirect("/account")
 
     return render(request, 'login.html', {'form': logForm,
                                           'error': error})
+
+
+def logout(request):
+    request.session.clear()
+    return redirect("/")
 
 
 def air_detail(request, air_id):

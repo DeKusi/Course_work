@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+</head>
+<body>
+<h1>Список пользователей</h1>
+{% for user in data %}
+    {% if user.position == 'user' and user.status == 'true' %}
+    <p>{{ user.login }}</p>
+    {% endif %}
+{% endfor %}
+</body>
+</html>

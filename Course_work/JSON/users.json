@@ -4,13 +4,50 @@
       "login": "Alex",
       "id": 1,
       "password": "1234",
-      "position": "Admin"
+      "position": "admin",
+      "status": "true"
     },
     {
       "login": "P4nuta",
       "id": 2,
       "password": "4321",
-      "position": "superuser"
+      "position": "user",
+      "status": "true"
+    },
+    {
+      "login": "De_Kusi",
+      "id": 3,
+      "password": "123",
+      "position": "moderator",
+      "status": "true"
+    },
+    {
+      "login": "Kate",
+      "id": 4,
+      "password": "1",
+      "position": "user",
+      "status": "true"
+    },
+    {
+      "login": "kdl",
+      "id": 5,
+      "password": "1",
+      "position": "user",
+      "status": "true"
+    },
+    {
+      "login": "Mod1",
+      "id": 6,
+      "password": "1",
+      "position": "moderator",
+      "status": "true"
+    },
+    {
+      "login": "Mod2",
+      "id": 7,
+      "password": "2",
+      "position": "moderator",
+      "status": "true"
     }
   ]
 }

@@ -5,6 +5,11 @@
     <title>{{name}}</title>
 </head>
 <body>
+<button>
+    <a href="/">
+        Главная
+    </a>
+</button>
 <h1>{{ name }}</h1>
  <table>
         <tr>
@@ -29,6 +34,11 @@
             <td>
                 <p>Классы обслуживания</p>
             </td>
+            {% if 'id' in request.session %}
+            <td>
+                <p>Билеты</p>
+            </td>
+            {% endif%}
         </tr>
     {% for fly in flights %}
         <tr>
@@ -69,6 +79,15 @@
                 </p>
                 {% endfor %}
              </td>
+            {% if 'id' in request.session %}
+                <td>
+                <button>
+                    <a href="#">
+                        Купить билет
+                    </a>
+                </button>
+                </td>
+            {% endif %}
 
         </tr>
     {% endfor %}

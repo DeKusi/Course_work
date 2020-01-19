@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+</head>
+<body>
+{{ request.session.login }}
+
+<p>
+<button>
+    <a href="#">
+        Добавить аэропорт
+    </a>
+</button>
+</p>
+
+<p>
+<button>
+    <a href="#">
+        Удалить аэропорт
+    </a>
+</button>
+</p>
+
+<p>
+<button>
+    <a href="/moderator_list">
+        Список модераторов
+    </a>
+</button>
+</p>
+<p>
+<button>
+    <a href="/add_mod">
+        Добавить модератора
+    </a>
+</button>
+</p>
+<p>
+<button>
+    <a href="#">
+        Удалить модератора
+    </a>
+</button>
+</p>
+
+<p>
+<button>
+    <a href="/user_list">
+        Список пользователей
+    </a>
+</button>
+</p>
+<p>
+<button>
+    <a href="/add_user">
+        Добавить пользователя
+    </a>
+</button>
+</p>
+<p>
+<button>
+    <a href="/list_del_user">
+        Удалить пользователя
+    </a>
+</button>
+</p>
+</body>
+</html>
