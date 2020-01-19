@@ -25,29 +25,23 @@
         <tr>
             <td>
                 {% if air.0 != 0 %}
-                <button>
                     <a href="{% url 'air_detail_url' air.0.id %}">
                          {{ air.0.name }}
                      </a>
-                </button>
                 {% endif %}
             </td>
              <td>
                  {% if air.1 != 0 %}
-               <button>
                     <a href="{% url 'air_detail_url' air.1.id %}">
                          {{ air.1.name }}
                      </a>
-                </button>
                  {% endif %}
              </td>
             <td>
                 {% if air.2 != 0 %}
-               <button>
                     <a href="{% url 'air_detail_url' air.2.id %}">
                          {{ air.2.name }}
                      </a>
-                </button>
                 {% endif %}
              </td>
         </tr>
@@ -57,8 +51,7 @@
       </div>
     
       <div class="right-side">
-
-        <button>
+        
          {% if "id" not in request.session %}
            <a href="/login/">Авторизация</a>
          {% else %}
@@ -66,7 +59,6 @@
              {{ request.session.login }}
            </a> 
          {% endif %}
-       </button>
       
       </div>
     </div>
