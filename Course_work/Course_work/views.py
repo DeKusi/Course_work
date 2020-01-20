@@ -57,6 +57,17 @@ def account(request):
     return render(request, page, {'data': data})
 
 
+def prop_tik(request):
+    with open("JSON/users.json", 'rb') as read_file_json:
+        users = json.load(read_file_json)
+    page = 'account_user.html'
+    if len(users['users'][int(request.session['id']) - 1]['tickets']) == 0:
+        data = [0]
+    else:
+        data = users['users'][int(request.session['id']) - 1]['tickets']
+    return render(request, page, {'data': data})
+
+
 def error404(request):
     return render(request, 'error_404.html', {})
 

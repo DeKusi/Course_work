@@ -6,7 +6,27 @@
       "password": "1234",
       "position": "admin",
       "status": "true",
-      "tickets": []
+      "tickets": [
+        {
+          "id": 1,
+          "slug": 1,
+          "status": "true",
+          "point_of_departure": "Аэропорт Домодедово",
+          "surf_point": "Аэропорт Пулково",
+          "departure_time": "11:00",
+          "arrival_time": "11:30",
+          "plane": {
+            "name": "Boeing",
+            "model": "777",
+            "type": "Пассажирский самолёт",
+            "service_classes": [
+              "Эконом",
+              "Бизнес",
+              "Первый"
+            ]
+          }
+        }
+      ]
     },
     {
       "login": "P4nuta",
@@ -46,6 +66,24 @@
             "type": "Пассажирский самолёт",
             "service_classes": [
               "Эконом",
+              "Бизнес",
+              "Первый"
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "slug": 2,
+          "status": "true",
+          "point_of_departure": "Аэропорт Домодедово",
+          "surf_point": "Аэропорт Бойсе",
+          "departure_time": "15:15",
+          "arrival_time": "22:40",
+          "plane": {
+            "name": "Airbus",
+            "model": "A330",
+            "type": "Пассажирский самолёт",
+            "service_classes": [
               "Бизнес",
               "Первый"
             ]
@@ -108,7 +146,7 @@
       "id": 7,
       "password": "2",
       "position": "moderator",
-      "status": "true",
+      "status": "false",
       "tickets": []
     },
     {

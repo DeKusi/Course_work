@@ -10,6 +10,45 @@
         Главная
     </a>
 </button>
+{% if 'id' not in request.session %}
+<button>
+    <a href="/login/">
+        Авторизация
+    </a>
+</button>
+    <button>
+        <a href="/registration/">
+            Регистрация
+        </a>
+    </button>
+{% elif request.session.position == 'user'%}
+    <button>
+        <a href="/account/">
+            {{ request.session.login }}
+        </a>
+    </button>
+    <button>
+        <a href="/logout">
+             Выйти
+        </a>
+    </button>
+{% elif request.session.position == 'moderator' or request.session.position == 'admin'%}
+    <button>
+        <a href="/account/">
+            Управление
+        </a>
+    </button>
+    <button>
+        <a href="prop_tik">
+            Купленные билеты
+        </a>
+    </button>
+    <button>
+        <a href="/logout">
+             Выйти
+        </a>
+    </button>
+{% endif %}
 <h1>{{ name }}</h1>
 {% if flights == 0 %}
 <p>Рейсов нет</p>

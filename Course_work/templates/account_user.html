@@ -2,9 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% if request.session.position == 'user' %}
     <title>Личный кабинет</title>
+    {% else %}
+    <title>Купленные билеты</title>
+    {% endif %}
 </head>
 <body>
+<button>
+    <a href="/">
+        Главная
+    </a>
+</button>
+
+{% if request.session.position == 'user'%}
+    <button>
+        <a href="/account/">
+            {{ request.session.login }}
+        </a>
+    </button>
+    <button>
+        <a href="/logout">
+             Выйти
+        </a>
+    </button>
+{% elif request.session.position == 'moderator' or request.session.position == 'admin'%}
+    <button>
+        <a href="/account/">
+            Управление
+        </a>
+    </button>
+    <button>
+        <a href="#">
+            Купленные билеты
+        </a>
+    </button>
+    <button>
+        <a href="/logout">
+             Выйти
+        </a>
+    </button>
+{% endif %}
 <h1>
     {{ request.session.login }}
 </h1>

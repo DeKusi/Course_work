@@ -137,6 +137,30 @@
           }
         }
       ]
+    },
+    {
+      "name": "Аэропорт10",
+      "id": 5,
+      "status": "true",
+      "flights": [
+        {
+          "id": 1,
+          "slug": 7,
+          "point_of_departure": "Аэропорт10",
+          "surf_point": "Магадан",
+          "departure_time": "18:25",
+          "arrival_time": "23:00",
+          "plane": {
+            "name": "Boeng",
+            "model": "123",
+            "type": "Пассажираский самолёт",
+            "service_classes": [
+              "Эконом",
+              " Бизнес"
+            ]
+          }
+        }
+      ]
     }
   ]
 }
