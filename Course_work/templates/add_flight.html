@@ -14,7 +14,7 @@
 </header>
 <body>
 <div class="table">
- <form action="{% url 'add_flight1' air_id%}" method="post">
+ <form action="{% url 'add_flight1' air_id%}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <br><input type="submit" value="Добавить"/></br>

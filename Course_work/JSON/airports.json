@@ -7,6 +7,7 @@
       "flights": [
         {
           "id": 1,
+          "slug": 1,
           "status": "true",
           "point_of_departure": "Аэропорт Домодедово",
           "surf_point": "Аэропорт Пулково",
@@ -25,6 +26,7 @@
         },
         {
           "id": 2,
+          "slug": 2,
           "status": "true",
           "point_of_departure": "Аэропорт Домодедово",
           "surf_point": "Аэропорт Бойсе",
@@ -49,6 +51,7 @@
       "flights": [
         {
           "id": 1,
+          "slug": 3,
           "status": "true",
           "point_of_departure": "Аэропорт Шереметьево",
           "surf_point": "Аэропорт Самуи",
@@ -67,6 +70,7 @@
         },
         {
           "id": 2,
+          "slug": 4,
           "status": "true",
           "point_of_departure": "Аэропорт Шереметьево",
           "surf_point": "Аэропорт Пхукет",
@@ -91,6 +95,7 @@
       "flights": [
         {
           "id": 1,
+          "slug": 5,
           "status": "true",
           "point_of_departure": "Аэропорт Быково",
           "surf_point": "Аэропорт Тбилиси",
@@ -111,33 +116,23 @@
     },
     {
       "name": "Аэропорт1",
-      "id": 5,
-      "status": "true",
-      "flights": []
-    },
-    {
-      "name": "Аэропорт2",
-      "id": 6,
-      "status": "true",
-      "flights": []
-    },
-    {
-      "name": "Аэропорт3",
-      "id": 6,
+      "id": 4,
       "status": "true",
       "flights": [
         {
           "id": 1,
-          "point_of_departure": "Аэропорт3",
-          "surf_point": null,
-          "departure_time": null,
-          "arrival_time": null,
+          "slug": 6,
+          "point_of_departure": "Аэропорт1",
+          "surf_point": "Магадан",
+          "departure_time": "18:25",
+          "arrival_time": "23:00",
           "plane": {
-            "name": null,
-            "model": null,
-            "type": null,
+            "name": "Boeng",
+            "model": "123",
+            "type": "Пассажираский самолёт",
             "service_classes": [
-              "None"
+              "Эконом",
+              " Бизнес"
             ]
           }
         }

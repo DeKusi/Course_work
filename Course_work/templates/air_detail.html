@@ -82,15 +82,14 @@
                 </p>
                 {% endfor %}
              </td>
-        {% for tik in user_tickets %}
-            {% if 'id' in request.session and tik.point_of_departure == name and tik.id == fly.id%}
+            {% if 'id' in request.session and fly.slug in list_slug%}
                 <td>
                 <button>
                         Билет куплен
                 </button>
                 </td>
             {% else %}
-                {% if 'id' in request.session and fly.point_of_departure in list_point_of_departure%}
+                {% if 'id' in request.session %}
                 <td>
                 <button>
                     <a href="{% url 'add_ticket' id fly.id%}">
@@ -102,7 +101,6 @@
 
 
             {% endif %}
-        {% endfor %}
         </tr>
 {% endfor %}
  </table>

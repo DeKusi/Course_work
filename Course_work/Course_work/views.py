@@ -105,18 +105,26 @@ def add_flight1(request, air_id):
     if request.POST:
         with open("JSON/airports.json", encoding='utf-8') as read_file_json:
             airports = json.load(read_file_json)
-        air_name = airports['airports'][int(air_id)-1]['name']
+
+        air_name = airports['airports'][int(air_id) - 1]['name']
         air = airports['airports'][int(air_id) - 1]['flights']
         req = request.POST
-        surf_point = str(req.get("Пункт прибытия "))
-        departure_time = str(req.get("Время отбытия "))
-        arrival_time = str(req.get("Время прибытия "))
-        plane_name = str(req.get("Название самолёта "))
-        plane_model = str(req.get("Модель самолёта "))
-        plane_type = str(req.get("Тип самолёта "))
-        service_classes = str(req.get("Классы обслуживания(через ,) "))
-        classes = str(service_classes).split(',')
+        surf_point = req.get("surf_point")
+        departure_time = req.get("departure_time")
+        arrival_time = req.get("arrival_time")
+        plane_name = req.get("plane_name")
+        plane_model = req.get("plane_model")
+        plane_type = req.get("plane_type")
+        service_classes = req.get("service_classes")
+        classes = service_classes.split(',')
+        s = 0
+        for ai in airports['airports']:
+            s += len(ai['flights'])
+
+        # print(surf_point, departure_time, arrival_time, plane_name, plane_model, plane_type, service_classes)
+
         air.append({"id": int(len(air)) + 1,
+                    "slug": s + 1,
                     "point_of_departure": air_name,
                     "surf_point": surf_point,
                     "departure_time": departure_time,
@@ -330,6 +338,7 @@ def logout(request):
 def air_detail(request, air_id):
     list_point_of_departure = []
     user_tickets = 0
+    list_slug = [0]
     with open("JSON/airports.json", encoding='utf-8') as read_file_json:
         air = json.load(read_file_json)
 
@@ -345,15 +354,18 @@ def air_detail(request, air_id):
         with open("JSON/users.json", encoding='utf-8') as read_file_json:
             users = json.load(read_file_json)
         user_tickets = users['users'][int(request.session['id']) - 1]['tickets']
-        list_fly_id = []
+        list_slug = []
         for tik in user_tickets:
-            list_point_of_departure.append(tik['point_of_departure'])
+            list_slug.append(tik['slug'])
+
+        # список слагов для купить/куплен у того, кто в сессии
 
     return render(request, "air_detail.html", {"name": name,
                                                "id": id,
                                                "flights": flights,
                                                "user_tickets": user_tickets,
-                                               'list_point_of_departure': list_point_of_departure})
+                                               'list_point_of_departure': list_point_of_departure,
+                                               'list_slug': list_slug})
 
 
 def add_ticket(request, air_id, fly_id):
