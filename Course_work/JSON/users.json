@@ -33,30 +33,14 @@
           }
         },
         {
-          "id": 2,
-          "point_of_departure": "Аэропорт Домодедово",
-          "surf_point": "Аэропорт Бойсе",
-          "departure_time": "15:15",
-          "arrival_time": "22:40",
-          "plane": {
-            "name": "Airbus",
-            "model": "A330",
-            "type": "Пассажирский самолёт",
-            "service_classes": [
-              "Бизнес",
-              "Первый"
-            ]
-          }
-        },
-        {
           "id": 1,
-          "point_of_departure": "Аэропорт Домодедово",
-          "surf_point": "Аэропорт Пулково",
-          "departure_time": "11:00",
-          "arrival_time": "11:30",
+          "point_of_departure": "Аэропорт Шереметьево ",
+          "surf_point": "Аэропорт Самуи",
+          "departure_time": "12:15",
+          "arrival_time": "19:00",
           "plane": {
-            "name": "Boeing",
-            "model": "777",
+            "name": "CRAIC",
+            "model": "CR929",
             "type": "Пассажирский самолёт",
             "service_classes": [
               "Эконом",
@@ -172,6 +156,46 @@
       "id": 7,
       "password": "2",
       "position": "moderator",
+      "status": "true",
+      "tickets": []
+    },
+    {
+      "login": "Use1",
+      "id": 8,
+      "password": "1",
+      "position": "user",
+      "status": "false",
+      "tickets": []
+    },
+    {
+      "login": "User2",
+      "id": 9,
+      "password": "2",
+      "position": "user",
+      "status": "false",
+      "tickets": []
+    },
+    {
+      "login": "Mod3",
+      "id": 10,
+      "password": "3",
+      "position": "moderator",
+      "status": "false",
+      "tickets": []
+    },
+    {
+      "login": "User3",
+      "id": 11,
+      "password": "3",
+      "position": "user",
+      "status": "true",
+      "tickets": []
+    },
+    {
+      "login": "User 4",
+      "id": 12,
+      "password": "4",
+      "position": "user",
       "status": "true",
       "tickets": []
     }

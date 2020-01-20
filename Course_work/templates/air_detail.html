@@ -11,6 +11,9 @@
     </a>
 </button>
 <h1>{{ name }}</h1>
+{% if flights == 0 %}
+<p>Рейсов нет</p>
+{% else %}
  <table>
         <tr>
             <td>
@@ -79,13 +82,15 @@
                 </p>
                 {% endfor %}
              </td>
-            {% if 'id' in request.session and user_tickets.0.point_of_departure == name and user_tickets.0.id == fly.id%}
+        {% for tik in user_tickets %}
+            {% if 'id' in request.session and tik.point_of_departure == name and tik.id == fly.id%}
                 <td>
                 <button>
                         Билет куплен
                 </button>
                 </td>
-                {% elif 'id' in request.session%}
+            {% else %}
+                {% if 'id' in request.session and fly.point_of_departure in list_point_of_departure%}
                 <td>
                 <button>
                     <a href="{% url 'add_ticket' id fly.id%}">
@@ -95,8 +100,12 @@
                 </td>
             {% endif %}
 
+
+            {% endif %}
+        {% endfor %}
         </tr>
-    {% endfor %}
+{% endfor %}
  </table>
+{% endif %}
 </body>
 </html>

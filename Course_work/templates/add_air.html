@@ -1,0 +1,34 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>
+Добавление аэроорта
+</title>
+</head>
+<link href="../../static/style.css" type="text/css" rel="stylesheet">
+<header>
+<img src="../../static/airling1.png">
+<h1>
+Добавление аэропорта
+</h1>
+</header>
+<body>
+<div class="table">
+ <form action="/add_air/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br><input type="submit" value="Добавить"/></br>
+    </form>
+    </div>
+{% if error  == 'Аэропорт уже есть' %}
+    <p>
+    {{ error }}
+    </p>
+{% endif %}
+<button>
+    <a href="/account">
+        Назад
+    </a>
+</button>
+</body>
+</html>

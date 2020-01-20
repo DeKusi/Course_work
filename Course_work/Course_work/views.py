@@ -61,6 +61,33 @@ def error404(request):
     return render(request, 'error_404.html', {})
 
 
+def add_air(request):
+    AddForm = AddAir(request.POST or None)
+    error = 'None'
+    if request.session['position'] != 'admin':
+        return redirect("/error")
+    elif request.POST:
+        with open("JSON/airports.json", 'rb') as read_file_json:
+            airports = json.load(read_file_json)
+        req = request.POST
+        name = req.get("name")
+        for air in airports['airports']:
+            if air['name'] == name:
+                error = 'Аэропорт уже есть'
+        if error == 'None':
+            airports['airports'].append({"name": name,
+                                         "id": len(airports['airports']) + 1,
+                                         "flights": []})
+            with open('JSON/airports.json', 'w', encoding='utf-8') as read_file_json:
+                read_file_json.write(json.dumps(airports, ensure_ascii=False, separators=(',', ': '), indent=2))
+            id1 = str(airports['airports'][-1]['id'])
+            urlre = '/airport/' + id1
+            return redirect(urlre)
+
+    return render(request, "add_air.html", {'form': AddForm,
+                                            'error': error})
+
+
 def user_list(request):
     if "id" not in request.session or request.session['status'] == 'false':
         return redirect("/error")
@@ -84,7 +111,7 @@ def moderator_list(request):
 def add_user(request):
     AddForm = AddUser(request.POST or None)
     error = 'None'
-    if 'id' in request.session:
+    if request.session['position'] != 'admin' and request.session['position'] != 'moderator':
         return redirect("/error")
     elif request.POST:
         with open("JSON/users.json", 'rb') as read_file_json:
@@ -106,12 +133,8 @@ def add_user(request):
                                    "tickets": []})
             with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
                 read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
-            request.session.set_expiry(86400)
-            request.session['id'] = users['users'][-1]['id']
-            request.session['login'] = users['users'][-1]['login']
-            request.session['position'] = users['users'][-1]['position']
-            request.session['status'] = users['users'][-1]['status']
-            return redirect("/account")
+
+            return redirect("/user_list")
 
     return render(request, "add_user.html", {'form': AddForm,
                                              'error': error})
@@ -149,7 +172,8 @@ def add_mod(request):
 
 
 def list_del_user(request):
-    if "id" not in request.session or request.session['status'] == 'false':
+    if request.session['position'] != 'admin' and request.session['position'] != 'moderator' or request.session[
+        'status'] == 'false':
         return redirect("/error")
     else:
         with open("JSON/users.json", encoding='utf-8') as read_file_json:
@@ -158,8 +182,19 @@ def list_del_user(request):
     return render(request, "del_user.html", {'data': data})
 
 
+def list_del_mod(request):
+    if request.session['position'] != 'admin' or request.session['status'] == 'false':
+        return redirect("/error")
+    else:
+        with open("JSON/users.json", encoding='utf-8') as read_file_json:
+            users = json.load(read_file_json)
+        data = users['users']
+    return render(request, "del_mod.html", {'data': data})
+
+
 def del_user1(request, user_id):
-    if "id" not in request.session or request.session['status'] == 'false':
+    if request.session['position'] != 'admin' and request.session['position'] != 'moderator' or request.session[
+        'status'] == 'false':
         return redirect("/error")
     with open("JSON/users.json", encoding='utf-8') as read_file_json:
         users = json.load(read_file_json)
@@ -167,6 +202,50 @@ def del_user1(request, user_id):
     with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
         read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
     return redirect("/list_del_user")
+
+
+def del_mod1(request, mod_id):
+    if request.session['position'] != 'admin' or request.session['status'] == 'false':
+        return redirect("/error")
+    with open("JSON/users.json", encoding='utf-8') as read_file_json:
+        users = json.load(read_file_json)
+    users['users'][int(mod_id) - 1]['status'] = 'false'
+    with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
+        read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
+    return redirect("/list_del_mod")
+
+
+def registration(request):
+    AddForm = AddUser(request.POST or None)
+    error = 'None'
+    if request.POST:
+        with open("JSON/users.json", 'rb') as read_file_json:
+            users = json.load(read_file_json)
+        req = request.POST
+        Login = req.get("login")
+        Pass = req.get("password")
+
+        for user in users['users']:
+            if user['login'] == Login:
+                error = 'Пользователь уже зрегистрирован'
+
+        if error == 'None':
+            users['users'].append({"login": Login,
+                                   "id": len(users['users']) + 1,
+                                   "password": Pass,
+                                   "position": "user",
+                                   "status": "true",
+                                   "tickets": []})
+            with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:
+                read_file_json.write(json.dumps(users, ensure_ascii=False, separators=(',', ': '), indent=2))
+            request.session.set_expiry(86400)
+            request.session['id'] = users['users'][-1]['id']
+            request.session['login'] = users['users'][-1]['login']
+            request.session['position'] = users['users'][-1]['position']
+            request.session['status'] = users['users'][-1]['status']
+            return redirect("/account")
+    return render(request, "registration.html", {'form': AddForm,
+                                                 'error': error})
 
 
 def login(request):
@@ -202,29 +281,32 @@ def logout(request):
 
 
 def air_detail(request, air_id):
+    list_point_of_departure = []
     user_tickets = 0
     with open("JSON/airports.json", encoding='utf-8') as read_file_json:
         air = json.load(read_file_json)
 
     name = air['airports'][int(air_id) - 1]['name']
     id = air_id
-    flights = air['airports'][int(air_id) - 1]['flights']
+    if len(air['airports'][int(air_id) - 1]['flights']) == 0:
+        flights = 0
+    else:
+        flights = air['airports'][int(air_id) - 1]['flights']
 
     # если зареганный чел, то если куплен билет, на кнопочке писалось куплен
     if 'id' in request.session:
         with open("JSON/users.json", encoding='utf-8') as read_file_json:
             users = json.load(read_file_json)
         user_tickets = users['users'][int(request.session['id']) - 1]['tickets']
-        list_point_of_departure = []
+        list_fly_id = []
         for tik in user_tickets:
-            list_point_of_departure.append()
-
-
+            list_point_of_departure.append(tik['point_of_departure'])
 
     return render(request, "air_detail.html", {"name": name,
                                                "id": id,
                                                "flights": flights,
-                                               "user_tickets": user_tickets})
+                                               "user_tickets": user_tickets,
+                                               'list_point_of_departure': list_point_of_departure})
 
 
 def add_ticket(request, air_id, fly_id):
@@ -233,7 +315,7 @@ def add_ticket(request, air_id, fly_id):
     with open("JSON/airports.json", encoding='utf-8') as read_file_air_json:
         airports = json.load(read_file_air_json)
 
-    users['users'][int(request.session['id'])-1]['tickets'].append(
+    users['users'][int(request.session['id']) - 1]['tickets'].append(
         airports['airports'][int(air_id) - 1]['flights'][int(fly_id) - 1])
 
     with open('JSON/users.json', 'w', encoding='utf-8') as read_file_json:

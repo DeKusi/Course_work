@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>
+    {% if 'id' in request.session %}
+        Добавление пользователя
+    {% else %}
+        Регистрация
+    {% endif %}
+</title>
+</head>
+<link href="../../static/style.css" type="text/css" rel="stylesheet">
+<header>
+<img src="../../static/airling1.png">
+<h1>
+    {% if 'id' in request.session %}
+        Добавление пользователя
+    {% else %}
+        Регистрация
+    {% endif %}:
+</h1>
+</header>
+<body>
+<div class="table">
+ <form action="/registration/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br><input type="submit" value="Регистрация"/></br>
+    </form>
+    </div>
+{% if error  == 'Пользователь уже зрегистрирован' %}
+    <p>
+    {{ error }}
+    </p>
+{% endif %}
+<button>
+    <a href="/">
+        Назад
+    </a>
+</button>
+</body>
+</html>
