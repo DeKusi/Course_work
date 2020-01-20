@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Личный кабинет</title>
+<link href="upmenu.css" type="text/css" rel="stylesheet">	
 </head>
 <body>
 <button>
@@ -27,7 +28,7 @@
     </button>
 <h1>{{ request.session.login }}</h1>
 
-<p>
+<p class="list">
 <button>
     <a href="/add_air">
         Добавить аэропорт
@@ -35,35 +36,35 @@
 </button>
 </p>
 
-<p>
+<p class="list">
 <button>
     <a href="#">
         Удалить аэропорт
     </a>
 </button>
 </p>
-<p>
+<p class="list">
 <button>
     <a href="/add_flight">
         Добавить рейс
     </a>
 </button>
 </p>
-<p>
+<p class="list">
 <button>
     <a href="/moderator_list">
         Список модераторов
     </a>
 </button>
 </p>
-<p>
+<p class="list">
 <button>
     <a href="/add_mod">
         Добавить модератора
     </a>
 </button>
 </p>
-<p>
+<p class="list">
 <button>
     <a href="/list_del_mod">
         Удалить модератора
@@ -71,21 +72,21 @@
 </button>
 </p>
 
-<p>
+<p class="list">
 <button>
     <a href="/user_list">
         Список пользователей
     </a>
 </button>
 </p>
-<p>
+<p class="list">
 <button>
     <a href="/add_user">
         Добавить пользователя
     </a>
 </button>
 </p>
-<p>
+<p class="list">
 <button>
     <a href="/list_del_user">
         Удалить пользователя
