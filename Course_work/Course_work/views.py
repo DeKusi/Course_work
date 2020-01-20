@@ -77,6 +77,7 @@ def add_air(request):
         if error == 'None':
             airports['airports'].append({"name": name,
                                          "id": len(airports['airports']) + 1,
+                                         "status": "true",
                                          "flights": []})
             with open('JSON/airports.json', 'w', encoding='utf-8') as read_file_json:
                 read_file_json.write(json.dumps(airports, ensure_ascii=False, separators=(',', ': '), indent=2))
@@ -86,6 +87,52 @@ def add_air(request):
 
     return render(request, "add_air.html", {'form': AddForm,
                                             'error': error})
+
+
+def add_flight(request):
+    if request.session['position'] != 'admin':
+        return redirect("/error")
+    else:
+        with open("JSON/airports.json", encoding='utf-8') as read_file_json:
+            airports = json.load(read_file_json)
+        airp = airports['airports']
+        return render(request, "list_air_fly.html", {'airp': airp})
+
+
+def add_flight1(request, air_id):
+    AddForm = AddFly(request.POST or None)
+    print(air_id)
+    if request.POST:
+        with open("JSON/airports.json", encoding='utf-8') as read_file_json:
+            airports = json.load(read_file_json)
+        air_name = airports['airports'][int(air_id)-1]['name']
+        air = airports['airports'][int(air_id) - 1]['flights']
+        req = request.POST
+        surf_point = str(req.get("Пункт прибытия "))
+        departure_time = str(req.get("Время отбытия "))
+        arrival_time = str(req.get("Время прибытия "))
+        plane_name = str(req.get("Название самолёта "))
+        plane_model = str(req.get("Модель самолёта "))
+        plane_type = str(req.get("Тип самолёта "))
+        service_classes = str(req.get("Классы обслуживания(через ,) "))
+        classes = str(service_classes).split(',')
+        air.append({"id": int(len(air)) + 1,
+                    "point_of_departure": air_name,
+                    "surf_point": surf_point,
+                    "departure_time": departure_time,
+                    "arrival_time": arrival_time,
+                    "plane": {
+                        "name": plane_name,
+                        "model": plane_model,
+                        "type": plane_type,
+                        "service_classes": classes}}
+                   )
+        with open('JSON/airports.json', 'w', encoding='utf-8') as read_file_json:
+            read_file_json.write(json.dumps(airports, ensure_ascii=False, separators=(',', ': '), indent=2))
+        return redirect("/")
+
+    return render(request, 'add_flight.html', {'form': AddForm,
+                                               'air_id': air_id})
 
 
 def user_list(request):

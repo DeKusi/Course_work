@@ -3,9 +3,11 @@
     {
       "name": "Аэропорт Домодедово",
       "id": 1,
+      "status": "true",
       "flights": [
         {
           "id": 1,
+          "status": "true",
           "point_of_departure": "Аэропорт Домодедово",
           "surf_point": "Аэропорт Пулково",
           "departure_time": "11:00",
@@ -23,6 +25,7 @@
         },
         {
           "id": 2,
+          "status": "true",
           "point_of_departure": "Аэропорт Домодедово",
           "surf_point": "Аэропорт Бойсе",
           "departure_time": "15:15",
@@ -40,12 +43,14 @@
       ]
     },
     {
-      "name": "Аэропорт Шереметьево ",
+      "name": "Аэропорт Шереметьево",
       "id": 2,
+      "status": "true",
       "flights": [
         {
           "id": 1,
-          "point_of_departure": "Аэропорт Шереметьево ",
+          "status": "true",
+          "point_of_departure": "Аэропорт Шереметьево",
           "surf_point": "Аэропорт Самуи",
           "departure_time": "12:15",
           "arrival_time": "19:00",
@@ -62,7 +67,8 @@
         },
         {
           "id": 2,
-          "point_of_departure": "Аэропорт Шереметьево ",
+          "status": "true",
+          "point_of_departure": "Аэропорт Шереметьево",
           "surf_point": "Аэропорт Пхукет",
           "departure_time": "13:00",
           "arrival_time": "17:15",
@@ -81,32 +87,12 @@
     {
       "name": "Аэропорт Быково",
       "id": 3,
+      "status": "true",
       "flights": [
         {
           "id": 1,
+          "status": "true",
           "point_of_departure": "Аэропорт Быково",
-          "surf_point": "Аэропорт Тбилиси",
-          "departure_time": "07:45",
-          "arrival_time": "16:30",
-          "plane": {
-            "name": "Comac",
-            "model": "CR 929",
-            "type": "Пассажирский самолёт",
-            "service_classes": [
-              "Эконом",
-              "Бизнес",
-              "Первый"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "Аэропорт Быково",
-      "id": 3,
-      "flights": [
-        {
-          "id": 1,
           "surf_point": "Аэропорт Тбилиси",
           "departure_time": "07:45",
           "arrival_time": "16:30",
@@ -126,12 +112,36 @@
     {
       "name": "Аэропорт1",
       "id": 5,
+      "status": "true",
       "flights": []
     },
     {
       "name": "Аэропорт2",
       "id": 6,
+      "status": "true",
       "flights": []
+    },
+    {
+      "name": "Аэропорт3",
+      "id": 6,
+      "status": "true",
+      "flights": [
+        {
+          "id": 1,
+          "point_of_departure": "Аэропорт3",
+          "surf_point": null,
+          "departure_time": null,
+          "arrival_time": null,
+          "plane": {
+            "name": null,
+            "model": null,
+            "type": null,
+            "service_classes": [
+              "None"
+            ]
+          }
+        }
+      ]
     }
   ]
 }

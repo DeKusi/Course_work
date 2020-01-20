@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все аэропорты</title>
+</head>
+<body>
+<h1>Все аэропорты</h1>
+{% for air in airp %}
+    {% if air.status == 'true' %}
+    <p>
+        {{ air.name }}
+        <button>
+            <a href="{% url 'add_flight1' air.id%}">
+                Добавить рейс
+            </a>
+        </button>
+    </p>
+    {% endif %}
+{% endfor %}
+</body>
+</html>

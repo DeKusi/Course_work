@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^logout/', views.logout, name='logout'),
     url(r'^account/', views.account, name='account'),
     url(r'^add_air/', views.add_air, name='add_air'),
+    url(r'^add_flight/(?P<air_id>\d+)', views.add_flight1, name='add_flight1'),
+    url(r'^add_flight/', views.add_flight, name='add_flight'),
 
     url(r'^user_list/', views.user_list),
     url(r'^moderator_list/', views.moderator_list),
