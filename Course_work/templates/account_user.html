@@ -7,6 +7,7 @@
     {% else %}
     <title>Купленные билеты</title>
     {% endif %}
+<link href="../../static/upmenu.css" type="text/css" rel="stylesheet">		
 </head>
 <body>
 <button>
@@ -14,7 +15,6 @@
         Главная
     </a>
 </button>
-
 {% if request.session.position == 'user'%}
     <button>
         <a href="/account/">
@@ -50,67 +50,47 @@
 {% if data.0 != 0 %}
 <table>
         <tr>
-            <td>
-                <p>Пункт Отправления</p>
-            </td>
-            <td>
-                <p>Пункт назначения</p>
-            </td>
-            <td>
-                <p>Время отправления</p>
-            </td>
-            <td>
-                <p>Время прибытия</p>
-            </td>
-            <td>
-                <p>Название</p>
-            </td>
-            <td>
-                <p>Модель</p>
-            </td>
-            <td>
-                <p>Тип</p>
-            </td>
-            <td>
-                <p>Классы обслуживания</p>
-            </td>
+            <th>Пункт Отправления</th>
+            <th>Пункт назначения</th>
+            <th>Время отправления</th>
+            <th>Время прибытия</th>
+            <th>Название</th>
+            <th>Модель</th>
+            <th>Тип</th>
+            <th>Классы обслуживания</th>
         </tr>
     {% for fly in data %}
         <tr>
+            <td>{{fly.point_of_departure}}</td>
             <td>
-                <p>
-                    {{fly.point_of_departure}}
-                </p>
-            </td>
-            <td>
-                <p>
+                 
                     {{fly.surf_point}}
-                </p>
+                 
             </td>
             <td>
-                <p>
+                 
                     {{ fly.departure_time }}
-                </p>
+                 
             </td>
              <td>
-                 <p>
+                  
                      {{fly.arrival_time}}
-                 </p>
+                  
              </td>
              <td>
-                <p>
+                 
                     {{fly.plane.name}}
-                </p>
+                 
              </td>
              <td>
-                <p>
+                 
                     {{fly.plane.model}}
-                </p>
+                 
              </td>
              <td>
-                <p>
+                 
                     {{fly.plane.type}}
-                </p>
+                 
              </td>
             <td>
                 {% for class in fly.plane.service_classes %}
