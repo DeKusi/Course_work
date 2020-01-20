@@ -5,6 +5,29 @@
     <title>Все аэропорты</title>
 </head>
 <body>
+
+{% if request.session.position == 'moderator' or request.session.position == 'admin'%}
+    <button>
+        <a href="/">
+            Главная
+        </a>
+    </button>
+    <button>
+        <a href="/account/">
+            Управление
+        </a>
+    </button>
+    <button>
+        <a href="prop_tik">
+            Купленные билеты
+        </a>
+    </button>
+    <button>
+        <a href="/logout">
+             Выйти
+        </a>
+    </button>
+{% endif %}
 <h1>Все аэропорты</h1>
 {% for air in airp %}
     {% if air.status == 'true' %}

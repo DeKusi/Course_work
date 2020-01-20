@@ -5,6 +5,30 @@
     <title>Модераторы</title>
 </head>
 <body>
+
+{% if request.session.position == 'moderator' or request.session.position == 'admin'%}
+    <button>
+        <a href="/">
+            Главная
+        </a>
+    </button>
+    <button>
+        <a href="/account/">
+            Управление
+        </a>
+    </button>
+    <button>
+        <a href="prop_tik">
+            Купленные билеты
+        </a>
+    </button>
+    <button>
+        <a href="/logout">
+             Выйти
+        </a>
+    </button>
+{% endif %}
+
 <h1>Список модераторов</h1>
 {% for mod in data %}
     {% if mod.position == 'moderator' and mod.status == 'true' %}

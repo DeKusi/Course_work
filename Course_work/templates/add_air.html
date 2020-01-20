@@ -13,6 +13,30 @@
 </h1>
 </header>
 <body>
+
+{% if request.session.position == 'moderator' or request.session.position == 'admin'%}
+    <button>
+        <a href="/">
+            Главная
+        </a>
+    </button>
+    <button>
+        <a href="/account/">
+            Управление
+        </a>
+    </button>
+    <button>
+        <a href="prop_tik">
+            Купленные билеты
+        </a>
+    </button>
+    <button>
+        <a href="/logout">
+             Выйти
+        </a>
+    </button>
+{% endif %}
+
 <div class="table">
  <form action="/add_air/" method="post">
         {% csrf_token %}
